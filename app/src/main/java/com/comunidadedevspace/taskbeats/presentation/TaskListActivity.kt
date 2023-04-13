@@ -1,4 +1,4 @@
-package com.comunidadedevspace.taskbeats
+package com.comunidadedevspace.taskbeats.presentation
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.comunidadedevspace.taskbeats.R
+import com.comunidadedevspace.taskbeats.data.AppDataBase
+import com.comunidadedevspace.taskbeats.data.Task
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
@@ -90,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             listFromDataBase()
         }
     }
-    private fun updateIntoDataBase(task:Task) {
+    private fun updateIntoDataBase(task: Task) {
         CoroutineScope(IO).launch{
             dao.update(task)
             listFromDataBase()
@@ -124,7 +127,7 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun onListItemClicked(task:Task){
+    private fun onListItemClicked(task: Task){
         openTaskListDetail(task)
     }
 
@@ -157,7 +160,7 @@ enum class ActionType{
 }
 
 data class TaskAction (
-    val task:Task,
+    val task: Task,
     val actionType: String
     ) : java.io.Serializable
 

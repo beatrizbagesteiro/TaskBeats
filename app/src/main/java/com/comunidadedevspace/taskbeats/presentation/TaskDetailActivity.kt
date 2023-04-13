@@ -1,7 +1,6 @@
-package com.comunidadedevspace.taskbeats
+package com.comunidadedevspace.taskbeats.presentation
 
 import android.app.Activity
-import android.app.Notification.Action
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.comunidadedevspace.taskbeats.R
+import com.comunidadedevspace.taskbeats.data.Task
 import com.google.android.material.snackbar.Snackbar
 
 class TaskDetailActivity : AppCompatActivity() {
@@ -22,10 +23,10 @@ class TaskDetailActivity : AppCompatActivity() {
     companion object{
         private const val TASK_EXTRA = "task.extra.detail"
 
-        fun start(context: Context, task:Task?):Intent{
+        fun start(context: Context, task: Task?):Intent{
             val intent = Intent(context, TaskDetailActivity::class.java)
                 .apply {
-                    putExtra(TaskDetailActivity.TASK_EXTRA, task)
+                    putExtra(TASK_EXTRA, task)
                 }
             return intent
         }
@@ -56,7 +57,7 @@ class TaskDetailActivity : AppCompatActivity() {
                 if(task == null){
                     addOrUpdateTask(title,desc, ActionType.CREATE,0 )
                 }else{
-                    addOrUpdateTask(title,desc,ActionType.UPDATE, task!!.id)
+                    addOrUpdateTask(title,desc, ActionType.UPDATE, task!!.id)
                 }
 
             }else{
@@ -71,7 +72,7 @@ class TaskDetailActivity : AppCompatActivity() {
 
     private fun addOrUpdateTask (title:String,
                                  description:String,
-                                 actionType:ActionType,
+                                 actionType: ActionType,
                                  id:Int){
         val task = Task(id,title,description)
         returnAction(task, actionType)
@@ -96,7 +97,7 @@ class TaskDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun returnAction(task:Task, actionType: ActionType){
+    private fun returnAction(task: Task, actionType: ActionType){
         val intent = Intent()
             .apply {
                 val taskAction = TaskAction(task, actionType.name)
